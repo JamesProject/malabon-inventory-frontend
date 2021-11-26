@@ -18,7 +18,11 @@ export default {
       { name: 'format-detection', content: 'telephone=no' }
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
+      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+      {
+        rel: 'stylesheet',
+        href: 'https://fonts.googleapis.com/css?family=Lato:400,700'
+      }
     ]
   },
 
@@ -37,15 +41,37 @@ export default {
   buildModules: [
     // https://go.nuxtjs.dev/vuetify
     '@nuxtjs/vuetify',
+    '@nuxtjs/tailwindcss',
+    'nuxt-font-loader'
   ],
-
+  fontLoader: {
+    url: 'https://fonts.googleapis.com/css2?family=Century%20Gothic',
+    prefetch: true,
+    preconnect: true
+  },
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
+    '@nuxtjs/axios',
+    '@nuxtjs/auth-next'
   ],
+  auth:{
+    redirect: {
+      home: '/profile',
+    },
+    strategies: {
+      'laravelPassport': {
+        provider: 'laravel/passport',
+        url: 'http://localhost:8008',
+        clientId: '7',
+        clientSecret: 'guFeLp66wQf7eg43RblqX1Sam0wzPUKrRPHxXrj0'
+      },
+    }
+  },
 
   // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify
   vuetify: {
     customVariables: ['~/assets/variables.scss'],
+    treeShake: true,
     theme: {
       themes: {
         dark: {
