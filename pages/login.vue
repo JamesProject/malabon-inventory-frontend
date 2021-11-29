@@ -23,8 +23,8 @@
                             </div>
                             <div class=" tw-mt-3">
 
-                                <v-text-field color="#FF5976"  :error="error" @input="error=false" dense label="Username" outlined required></v-text-field>
-                                <v-text-field color="#FF5976" 
+                                <v-text-field v-model="data.username" color="#FF5976"  :error="error" @input="error=false" dense label="Username" outlined required></v-text-field>
+                                <v-text-field v-model="data.password" color="#FF5976"
                                 @click:append="show1 = !show1"
                                 :type="show1 ? 'text' : 'password'"
                                 :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'" :error="error" @input="error=false" dense label="Password" outlined   required>
@@ -33,7 +33,7 @@
                                 <v-checkbox dense label="Keep me signed in" value="false"></v-checkbox>
 
                                 <v-btn :loading="loading" block @click="testLogin()" color="#FF5976">
-                                  
+
                                     <template #default>
                                         <span class="tw-text-white">
                                             Sign in
@@ -59,23 +59,22 @@
             return {
                 loading: false,
                 error:false,
-                show1:false
+                show1:false,
+                data:{
+                  password:'',
+                  username:''
+                }
             }
         },
         methods: {
             testLogin() {
-                // this.loading = true
-                // setTimeout(l=>{
-                //     this.loading = false
-                //     this.error = true
-                // }, 2000);
+               
                this.$auth.loginWith('laravelPassport',{
                    data:{
-                        username:'admin@admin.com',
-                        password:'123123',
+                        ...this.data,
                         grant_type:'password',
                         client_id: '2',
-                        client_secret:'kjVy1a7xOFROKrLbqMg0wOQ1lIbJtRrX4DUzWPHx'
+                        client_secret:'mmE2ehtjvtxCds23sCnlSGMPQvLv26P5Ec5usiEQ'
                    }
                }).then(()=>{
                    this.$router.push({name:'index'})
