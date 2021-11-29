@@ -13,10 +13,10 @@
         </div>
         <v-list-item-content>
           <v-list-item-title class="text-h6">
-            James Ulip
+              {{$auth.user.name}}
           </v-list-item-title>
           <v-list-item-subtitle>
-            Programmer
+              {{$auth.user.email}}
           </v-list-item-subtitle>
         </v-list-item-content>
       </v-list-item>
@@ -59,7 +59,7 @@
 
       <template v-slot:append>
         <v-list>
-          <v-list-item @click="$auth.logout(/* .... */)">
+          <v-list-item @click="logoutUser()">
             <v-list-item-action>
               <v-icon>mdi-logout</v-icon>
             </v-list-item-action>

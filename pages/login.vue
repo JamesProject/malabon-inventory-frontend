@@ -23,14 +23,14 @@
                             </div>
                             <div class=" tw-mt-3">
 
-                                <v-text-field v-model="data.username" color="#FF5976"  :error="error" @input="error=false" dense label="Username" outlined required></v-text-field>
+                                <v-text-field v-model="data.email" color="#FF5976"  :error="error" @input="error=false" dense label="Username" outlined required></v-text-field>
                                 <v-text-field v-model="data.password" color="#FF5976"
                                 @click:append="show1 = !show1"
                                 :type="show1 ? 'text' : 'password'"
                                 :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'" :error="error" @input="error=false" dense label="Password" outlined   required>
                                 </v-text-field>
 
-                                <v-checkbox dense label="Keep me signed in" value="false"></v-checkbox>
+                                <v-checkbox v-model="data.remember_me" dense label="Keep me signed in" :value="true"></v-checkbox>
 
                                 <v-btn :loading="loading" block @click="testLogin()" color="#FF5976">
 
@@ -62,22 +62,23 @@
                 show1:false,
                 data:{
                   password:'',
-                  username:''
+                  email:'',
+                  remember_me:false
                 }
             }
         },
+       
         methods: {
             testLogin() {
-               
-               this.$auth.loginWith('laravelPassport',{
-                   data:{
-                        ...this.data,
-                        grant_type:'password',
-                        client_id: '2',
-                        client_secret:'mmE2ehtjvtxCds23sCnlSGMPQvLv26P5Ec5usiEQ'
-                   }
+              this.loading = true
+               this.error = false
+              this.$auth.loginWith('laravelPassport',{
+                   data:this.data
                }).then(()=>{
                    this.$router.push({name:'index'})
+               }).catch(()=>{
+                  this.error = true
+                  this.loading = false
                })
 
 

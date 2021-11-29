@@ -65,11 +65,6 @@ export default {
       'laravelPassport': {
         provider: 'laravel/jwt',
         url: 'http://localhost:8000',
-        endpoints:{
-          login:{
-            url:'/api/oauth/token'
-          }
-        },
       },
     }
   },
