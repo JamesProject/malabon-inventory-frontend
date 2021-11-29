@@ -56,14 +56,20 @@ export default {
   ],
   auth:{
     redirect: {
-      home: '/profile',
+      login: '/login',
+      logout: '/',
+      callback: '/login',
+      home: '/'
     },
     strategies: {
       'laravelPassport': {
-        provider: 'laravel/passport',
-        url: 'http://localhost:8008',
-        clientId: '7',
-        clientSecret: 'guFeLp66wQf7eg43RblqX1Sam0wzPUKrRPHxXrj0'
+        provider: 'laravel/jwt',
+        url: 'http://localhost:8000',
+        endpoints:{
+          login:{
+            url:'/api/oauth/token'
+          }
+        },
       },
     }
   },

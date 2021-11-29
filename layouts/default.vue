@@ -59,7 +59,7 @@
 
       <template v-slot:append>
         <v-list>
-          <v-list-item no-action sub-group>
+          <v-list-item @click="$auth.logout(/* .... */)">
             <v-list-item-action>
               <v-icon>mdi-logout</v-icon>
             </v-list-item-action>
@@ -86,7 +86,7 @@
           </v-list-item>
         </v-list>
       </v-menu>
-      <v-toolbar-title v-text="title" />
+      <v-toolbar-title v-text="title" @click="logoutUser()"/>
       <v-spacer />
 
     </v-app-bar>
@@ -100,6 +100,7 @@
 
 <script>
   export default {
+    middleware: ['auth'],
     data() {
       return {
         clipped: true,
@@ -141,6 +142,12 @@
         right: true,
         rightDrawer: false,
         title: 'Inventory'
+      }
+    },
+    methods:{
+      async logoutUser(){
+        await this.$auth.logout()
+        this.$router.push('/login')
       }
     }
   }

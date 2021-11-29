@@ -1,5 +1,5 @@
 <template>
   <div>
-    welcome page
+    {{$auth.user}}
   </div>
 </template>

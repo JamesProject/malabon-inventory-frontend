@@ -64,11 +64,24 @@
         },
         methods: {
             testLogin() {
-                this.loading = true
-                setTimeout(l=>{
-                    this.loading = false
-                    this.error = true
-                }, 2000);
+                // this.loading = true
+                // setTimeout(l=>{
+                //     this.loading = false
+                //     this.error = true
+                // }, 2000);
+               this.$auth.loginWith('laravelPassport',{
+                   data:{
+                        username:'admin@admin.com',
+                        password:'123123',
+                        grant_type:'password',
+                        client_id: '2',
+                        client_secret:'kjVy1a7xOFROKrLbqMg0wOQ1lIbJtRrX4DUzWPHx'
+                   }
+               }).then(()=>{
+                   this.$router.push({name:'index'})
+               })
+
+
             }
         }
     }
